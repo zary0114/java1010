@@ -1,6 +1,7 @@
 spring:
   profiles:
     active: dev
+
 ---
 server:
   port: 9527
@@ -21,18 +22,22 @@ zuul:
   routes:
     plat.serviceId: plat-service
     plat.path: /plat/**
+    product.serviceId: product-service
+    product.path: /product/**
+
 ---
 server:
   port: 9528
 spring:
   application:
     name: MICROSERVICE-ZUUL-GATEWAY-TEST
+  profiles: test
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:7001/eureka
   instance:
-    instance-id: gateway-9527.com
+    instance-id: gateway-9528.com
     prefer-ip-address: true
 zuul:
   prefix: "/aigou"
@@ -40,3 +45,5 @@ zuul:
   routes:
     plat.serviceId: plat-service
     plat.path: /plat/**
+    product.serviceId: product-service
+    product.path: /product/**
